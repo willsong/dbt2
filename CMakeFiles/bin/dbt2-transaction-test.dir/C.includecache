@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/willsong/advdb/src/dbt2/src/sqlite/dbc_common.c
+common.h
+/home/willsong/advdb/src/dbt2/src/sqlite/common.h
+logging.h
+/home/willsong/advdb/src/dbt2/src/sqlite/logging.h
+sqlite_common.h
+/home/willsong/advdb/src/dbt2/src/sqlite/sqlite_common.h
+stdio.h
+-
+string.h
+-
+

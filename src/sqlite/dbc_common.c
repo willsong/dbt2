@@ -49,12 +49,22 @@ int _connect_to_db(struct db_context_t *dbc)
 		return ERROR;
 	}
 
+    int pCurrent = 0;
+    int pHighwater = 0;
+    sqlite3_status(SQLITE_STATUS_PAGECACHE_SIZE, &pCurrent, &pHighwater, 0);
+    LOG_ERROR_MESSAGE("FUCK1 %d", pHighwater);
+
     return OK;
 }
 
 /* Disconnect from the database and free the connection handle. */
 int _disconnect_from_db(struct db_context_t *dbc)
 {
+    int pCurrent = 0;
+    int pHighwater = 0;
+    sqlite3_status(SQLITE_STATUS_PAGECACHE_SIZE, &pCurrent, &pHighwater, 0);
+    LOG_ERROR_MESSAGE("FUCK2 %d", pHighwater);
+
 	sqlite3_close(dbc->db);
 	return OK;
 }

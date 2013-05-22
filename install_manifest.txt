@@ -1,0 +1,14 @@
+/bin/dbt2-client
+/bin/dbt2-datagen
+/bin/dbt2-driver
+/bin/dbt2-transaction-test
+/bin/dbt2-generate-report
+/bin/dbt2-get-os-info
+/bin/dbt2-post-process
+/bin/dbt2-run-workload
+/bin/dbt2-sysstats
+/bin/dbt2-plot-transaction-rate
+/bin/dbt2-sqlite-build-db
+/bin/dbt2-sqlite-plans
+/bin/dbt2-sqlite-start-db
+/bin/dbt2-sqlite-stop-db

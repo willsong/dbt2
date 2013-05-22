@@ -1,0 +1,1 @@
+/usr/bin/gcc  -g -Wall -Isrc/include -D_LARGEFILE64_SOURCE    CMakeFiles/bin/dbt2-datagen.dir/src/datagen.o CMakeFiles/bin/dbt2-datagen.dir/src/common.o  -o bin/dbt2-datagen -rdynamic -lm

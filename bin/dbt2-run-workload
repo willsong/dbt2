@@ -498,17 +498,17 @@ echo "Database Connections: $DBCON" >> ${OUTPUT_DIR}/readme.txt
 # Get any OS specific information, if this is a single trier test, then
 # the OS parameters will be in the database output directory.
 if [ -n ${DB_HOSTNAME} ] && [ ! "x${DB_HOSTNAME}" = "xlocalhost" ]; then
-	dbt2-get-os-info -o ${DRIVER_OUTPUT_DIR}/`hostname`/
+	./dbt2-get-os-info -o ${DRIVER_OUTPUT_DIR}/`hostname`/
 	DB_COMMAND="ssh ${DB_HOSTNAME}"
 	# Get the OS information from the database system.
 	${DB_COMMAND} dbt2-get-os-info -o ${DB_OUTPUT_DIR}
 	${DB_COMMAND} "uname -a >> ${DB_OUTPUT_DIR}/readme.txt"
 else
-	dbt2-get-os-info -o ${DB_OUTPUT_DIR}
+	./dbt2-get-os-info -o ${DB_OUTPUT_DIR}
 fi
 
 if [ "x${DB_COMMAND}" = "x" ]; then
-	dbt2-${DBMS}-stop-db ${MISC_ARG}
+	./dbt2-${DBMS}-stop-db ${MISC_ARG}
 else
 	${DB_COMMAND} "dbt2-${DBMS}-stop-db ${MISC_ARG}"
 fi
@@ -519,7 +519,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ "x${DB_COMMAND}" = "x" ]; then
-	eval dbt2-${DBMS}-start-db ${DB_PARAMS_ARG} ${MISC_ARG} \
+	eval ./dbt2-${DBMS}-start-db ${DB_PARAMS_ARG} ${MISC_ARG} \
 			-o ${DB_OUTPUT_DIR} || exit 1
 else
 	${DB_COMMAND} "dbt2-${DBMS}-start-db ${DB_PARAMS_ARG} ${MISC_ARG} \
@@ -612,7 +612,7 @@ while [ ${END} -lt ${WAREHOUSES} ]; do
 
 	CDIR="${CLIENT_OUTPUT_DIR}/`hostname`.${SEG}"
 	mkdir -p ${CDIR}
-	dbt2-client ${CLIENT_COMMAND_ARGS} -p ${PORT} -o ${CDIR} > \
+	./dbt2-client ${CLIENT_COMMAND_ARGS} -p ${PORT} -o ${CDIR} > \
 			${CLIENT_OUTPUT_DIR}/`hostname`/client-${SEG}.out 2>&1 || exit 1 &
 	PORT=`expr ${PORT} + 1`
 done
@@ -634,14 +634,14 @@ SAMPLE_LENGTH=60
 ITERATIONS=`expr ${SLEEPYTIME} / ${SAMPLE_LENGTH}`
 ITERATIONS=`expr ${ITERATIONS} + 1`
 if [ -n ${DB_HOSTNAME} ] && [ ! "x${DB_HOSTNAME}" = "xlocalhost" ]; then
-	dbt2-sysstats \
+	./dbt2-sysstats \
 			--iter ${ITERATIONS} \
 			--sample ${SAMPLE_LENGTH} \
 			--outdir ${DRIVER_OUTPUT_DIR}/`hostname` > ${DRIVER_OUTPUT_DIR}/`hostname`/stats.out 2>&1 &
 
 	${DB_COMMAND} "dbt2-sysstats --iter ${ITERATIONS} --sample ${SAMPLE_LENGTH} --outdir ${DB_OUTPUT_DIR} > ${DB_OUTPUT_DIR}/stats.out 2>&1" &
 else
-	dbt2-sysstats \
+	./dbt2-sysstats \
 			--iter ${ITERATIONS} \
 			--sample ${SAMPLE_LENGTH} \
 			--outdir ${DB_OUTPUT_DIR}/`hostname` > ${DRIVER_OUTPUT_DIR}/`hostname`/stats.out 2>&1 &
@@ -686,7 +686,7 @@ while [ ${END} -lt ${WAREHOUSES} ]; do
 	mkdir -p ${DDIR}
 	DRIVER_COMMAND_ARGS="-d ${CLIENT_HOSTNAME} -p ${PORT} -l ${DURATION} -wmin ${START} -wmax ${END} -w ${WAREHOUSES} -sleep ${SLEEPY} -outdir ${DDIR} -tpw ${THREADS_PER_WAREHOUSE} ${NO_THINK}"
 	PORT=`expr ${PORT} + 1`
-	dbt2-driver ${DRIVER_COMMAND_ARGS} > \
+	./dbt2-driver ${DRIVER_COMMAND_ARGS} > \
 			${DRIVER_OUTPUT_DIR}/`hostname`/driver-${SEG}.out 2>&1 || exit 1&
 done
 
@@ -754,7 +754,7 @@ echo "Killing client..."
 killall dbt2-client dbt2-driver 2> /dev/null
 
 if [ "x${DB_COMMAND}" = "x" ]; then
-	dbt2-${DBMS}-stop-db ${MISC_ARG}
+	./dbt2-${DBMS}-stop-db ${MISC_ARG}
 else
 	${DB_COMMAND} "dbt2-${DBMS}-stop-db ${MISC_ARG}"
 fi
@@ -770,7 +770,7 @@ MIXAGG="${OUTPUT_DIR}/mix.log"
 # single location to be ananlyzed.
 find ${DRIVER_OUTPUT_DIR} -name mix.log | xargs cat | \
 		sort -t ',' -k 1 > ${MIXAGG}
-dbt2-post-process ${MIXAGG} > ${REPORT_FILE}
+./dbt2-post-process ${MIXAGG} > ${REPORT_FILE}
 
 if [ ${USE_OPROFILE} -eq 1 ]; then
 	oprofile_annotate ${OUTPUT_DIR} &

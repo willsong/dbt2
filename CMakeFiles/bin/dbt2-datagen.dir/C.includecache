@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/willsong/advdb/src/dbt2/src/common.c
+pthread.h
+-
+stdarg.h
+-
+math.h
+-
+string.h
+-
+common.h
+-
+transaction_data.h
+-
+
+/home/willsong/advdb/src/dbt2/src/datagen.c
+common.h
+/home/willsong/advdb/src/dbt2/src/common.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+time.h
+-
+unistd.h
+-
+getopt.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+errno.h
+-
+

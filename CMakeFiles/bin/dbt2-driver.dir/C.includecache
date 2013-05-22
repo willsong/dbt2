@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/willsong/advdb/src/dbt2/src/driver.c
+config.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+ctype.h
+-
+errno.h
+-
+pthread.h
+-
+time.h
+-
+unistd.h
+-
+sys/time.h
+-
+common.h
+/home/willsong/advdb/src/dbt2/src/common.h
+logging.h
+/home/willsong/advdb/src/dbt2/src/logging.h
+driver.h
+/home/willsong/advdb/src/dbt2/src/driver.h
+client_interface.h
+/home/willsong/advdb/src/dbt2/src/client_interface.h
+input_data_generator.h
+/home/willsong/advdb/src/dbt2/src/input_data_generator.h
+db.h
+/home/willsong/advdb/src/dbt2/src/db.h
+transaction_queue.h
+/home/willsong/advdb/src/dbt2/src/transaction_queue.h
+db_threadpool.h
+/home/willsong/advdb/src/dbt2/src/db_threadpool.h
+

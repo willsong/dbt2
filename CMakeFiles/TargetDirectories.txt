@@ -1,0 +1,4 @@
+/home/willsong/advdb/src/dbt2/CMakeFiles/bin/dbt2-client.dir
+/home/willsong/advdb/src/dbt2/CMakeFiles/bin/dbt2-datagen.dir
+/home/willsong/advdb/src/dbt2/CMakeFiles/bin/dbt2-driver.dir
+/home/willsong/advdb/src/dbt2/CMakeFiles/bin/dbt2-transaction-test.dir
