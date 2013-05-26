@@ -1,0 +1,46 @@
+#!/bin/sh
+
+WH=10
+OUTPUT=""
+FORCE=0
+CREATE=0
+RUN=0
+
+while getopts "w:o:fcr" opt; do
+	case $opt in
+	w)
+		WH=${OPTARG}
+		;;
+	o)
+		OUTPUT=${OPTARG}
+		;;
+	f)
+		FORCE=1
+		;;
+	c)
+		CREATE=1
+		;;
+	r)
+		RUN=1
+		;;
+	esac
+done
+
+# echo "$WH"
+# echo "$OUTPUT"
+# echo "$FORCE"
+
+if [ "$FORCE" != "0" ]; then
+    echo "rm -rf ~/tmp/dbt2data/w$WH"
+    rm -rf ~/tmp/dbt2data/w$WH
+fi
+
+if [ "$CREATE" != "0" ]; then
+    echo "dbt2-sqlite-build-db -g -w $WH -d ~/tmp/dbt2-w$WH  -f ~/tmp/dbt2data/w$WH"
+    dbt2-sqlite-build-db -g -w $WH -d ~/tmp/dbt2-w$WH  -f ~/tmp/dbt2data/w$WH
+fi
+
+if [ "$RUN" != "0" ]; then
+    echo "dbt2-run-workload -a sqlite -p ~/tmp/dbt2-w$WH -c 1 -d 120 -w $WH -n -o ~/tmp/results/w10/$OUTPUT"
+    dbt2-run-workload -a sqlite -p ~/tmp/dbt2-w$WH -c 1 -d 120 -w $WH -n -o ~/tmp/results/w10/$OUTPUT
+fi

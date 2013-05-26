@@ -1,0 +1,1 @@
+gcc config.c -g -I/home/seongwhan/bin/sqlite/include -L/home/seongwhan/bin/sqlite/lib -lsqlite3 -o config.exe
